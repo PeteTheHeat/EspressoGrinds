@@ -10,7 +10,10 @@
     "newArchEnabled": true,
     "ios": {
       "bundleIdentifier": "com.peterargany.dialed",
-      "supportsTablet": true
+      "supportsTablet": true,
+      "infoPlist": {
+        "ITSAppUsesNonExemptEncryption": false
+      }
     },
     "android": {
       "adaptiveIcon": {
@@ -44,6 +47,11 @@
     "experiments": {
       "typedRoutes": true,
       "reactCompiler": true
+    },
+    "extra": {
+      "eas": {
+        "projectId": "9dd67712-fe63-4468-921e-1e4b4e686516"
+      }
     }
   }
 }

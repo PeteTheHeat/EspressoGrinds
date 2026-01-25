@@ -48,8 +48,19 @@ export function formatStep(value: number, step: number) {
   return value.toFixed(decimals);
 }
 
+export function formatStepTrimmed(value: number, step: number) {
+  const decimals = countDecimals(step);
+  const fixed = value.toFixed(decimals);
+  return stripTrailingZeros(fixed);
+}
+
 function countDecimals(step: number) {
   const stepString = step.toString();
   const decimalIndex = stepString.indexOf(".");
   return decimalIndex >= 0 ? stepString.length - decimalIndex - 1 : 0;
+}
+
+function stripTrailingZeros(value: string) {
+  const stripped = value.replace(/\.?0+$/, "");
+  return stripped.length > 0 ? stripped : "0";
 }

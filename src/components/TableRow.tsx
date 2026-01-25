@@ -9,6 +9,7 @@ type TableCell = {
   align?: "left" | "right" | "center";
   muted?: boolean;
   monospace?: boolean;
+  lines?: number;
 };
 
 type TableRowProps = {
@@ -24,7 +25,7 @@ export function TableRow({ cells, header = false, onPress }: TableRowProps) {
         {cells.map((cell) => (
           <View key={cell.key} style={[styles.cell, { flex: cell.flex ?? 1 }]}>
             <Text
-              numberOfLines={1}
+              numberOfLines={cell.lines ?? 1}
               style={[
                 styles.text,
                 header && styles.headerText,
@@ -50,7 +51,7 @@ export function TableRow({ cells, header = false, onPress }: TableRowProps) {
       {cells.map((cell) => (
         <View key={cell.key} style={[styles.cell, { flex: cell.flex ?? 1 }]}>
           <Text
-            numberOfLines={1}
+            numberOfLines={cell.lines ?? 1}
             style={[
               styles.text,
               header && styles.headerText,

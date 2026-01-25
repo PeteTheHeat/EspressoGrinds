@@ -2,6 +2,7 @@ import { useFocusEffect, useRouter } from "expo-router";
 import { useCallback, useMemo, useState } from "react";
 import {
   ActivityIndicator,
+  Keyboard,
   Modal,
   Pressable,
   StyleSheet,
@@ -27,6 +28,13 @@ const LIMITS = {
   time: { min: 0, max: 120, step: 1 },
 } as const;
 
+const DEFAULTS = {
+  grindSetting: "15",
+  weightIn: "18",
+  weightOut: "36",
+  timeSec: "30",
+};
+
 export default function AddExtractionScreen() {
   const router = useRouter();
 
@@ -35,10 +43,10 @@ export default function AddExtractionScreen() {
   const [beanError, setBeanError] = useState<string | null>(null);
 
   const [beanTypeId, setBeanTypeId] = useState<string>("");
-  const [grindSetting, setGrindSetting] = useState("");
-  const [weightIn, setWeightIn] = useState("");
-  const [weightOut, setWeightOut] = useState("");
-  const [timeSec, setTimeSec] = useState("");
+  const [grindSetting, setGrindSetting] = useState(DEFAULTS.grindSetting);
+  const [weightIn, setWeightIn] = useState(DEFAULTS.weightIn);
+  const [weightOut, setWeightOut] = useState(DEFAULTS.weightOut);
+  const [timeSec, setTimeSec] = useState(DEFAULTS.timeSec);
   const [notes, setNotes] = useState("");
 
   const [errors, setErrors] = useState<FormErrors>({});
@@ -125,13 +133,15 @@ export default function AddExtractionScreen() {
     try {
       await addExtraction(normalized);
 
-      setGrindSetting("");
-      setWeightIn("");
-      setWeightOut("");
-      setTimeSec("");
+      setGrindSetting(DEFAULTS.grindSetting);
+      setWeightIn(DEFAULTS.weightIn);
+      setWeightOut(DEFAULTS.weightOut);
+      setTimeSec(DEFAULTS.timeSec);
       setNotes("");
       setErrors({});
       setSuccessMessage("Extraction saved.");
+      Keyboard.dismiss();
+      router.replace("/(tabs)/extractions");
     } catch (error) {
       setSubmitError(error instanceof Error ? error.message : "Unable to save extraction.");
     } finally {
@@ -145,7 +155,6 @@ export default function AddExtractionScreen() {
     <Screen scroll>
       <View style={styles.header}>
         <Text style={styles.title}>Dial In</Text>
-        <Text style={styles.subtitle}>Track each extraction and iterate quickly.</Text>
       </View>
 
       {loadingBeans ? (
@@ -190,9 +199,7 @@ export default function AddExtractionScreen() {
               step={LIMITS.grind.step}
               min={LIMITS.grind.min}
               max={LIMITS.grind.max}
-              placeholder="e.g. 18.25"
               error={errors.grindSetting}
-              hint="0-50 in steps of 0.25"
             />
 
             <StepperInput
@@ -202,9 +209,7 @@ export default function AddExtractionScreen() {
               step={LIMITS.weight.step}
               min={LIMITS.weight.min}
               max={LIMITS.weight.max}
-              placeholder="e.g. 18.0"
               error={errors.weightIn}
-              hint="0-200g in steps of 0.1"
             />
 
             <StepperInput
@@ -214,9 +219,7 @@ export default function AddExtractionScreen() {
               step={LIMITS.weight.step}
               min={LIMITS.weight.min}
               max={LIMITS.weight.max}
-              placeholder="e.g. 36.0"
               error={errors.weightOut}
-              hint="0-200g in steps of 0.1"
             />
 
             <StepperInput
@@ -226,9 +229,7 @@ export default function AddExtractionScreen() {
               step={LIMITS.time.step}
               min={LIMITS.time.min}
               max={LIMITS.time.max}
-              placeholder="e.g. 28"
               error={errors.timeSec}
-              hint="0-120 seconds"
               keyboardType="number-pad"
             />
 
@@ -236,7 +237,6 @@ export default function AddExtractionScreen() {
               label="Tasting Notes"
               value={notes}
               onChangeText={setNotes}
-              placeholder="Acidity, sweetness, texture..."
               multiline
               inputProps={{ autoCapitalize: "sentences", returnKeyType: "done" }}
             />
@@ -287,10 +287,6 @@ const styles = StyleSheet.create({
     fontWeight: "800",
     letterSpacing: 0.3,
   },
-  subtitle: {
-    color: colors.textMuted,
-    fontSize: 14,
-  },
   sectionTitle: {
     color: colors.text,
     fontSize: 16,
@@ -310,8 +306,8 @@ const styles = StyleSheet.create({
   select: {
     minHeight: 52,
     borderRadius: radius.md,
-    borderWidth: StyleSheet.hairlineWidth,
-    borderColor: colors.border,
+    borderWidth: 1,
+    borderColor: colors.inputBorder,
     backgroundColor: colors.input,
     paddingHorizontal: spacing.md,
     flexDirection: "row",

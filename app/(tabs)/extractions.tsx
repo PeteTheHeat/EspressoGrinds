@@ -9,7 +9,7 @@ import { TableRow } from "@/src/components/TableRow";
 import { getBeanTypes, getExtractions } from "@/src/storage/repositories";
 import { colors, spacing } from "@/src/theme";
 import type { BeanType, Extraction } from "@/src/types";
-import { formatStep } from "@/src/utils/number";
+import { formatStepTrimmed } from "@/src/utils/number";
 
 type ExtractionRow = Extraction & { beanName: string };
 
@@ -89,12 +89,12 @@ export default function ExtractionsScreen() {
           <TableRow
             header
             cells={[
-              { key: "date", text: "Date/Time", flex: 1.6 },
-              { key: "bean", text: "Bean", flex: 1.4 },
-              { key: "grind", text: "Grind", flex: 1, align: "right", monospace: true },
-              { key: "in", text: "In", flex: 0.8, align: "right", monospace: true },
-              { key: "out", text: "Out", flex: 0.9, align: "right", monospace: true },
-              { key: "time", text: "Time", flex: 0.9, align: "right", monospace: true },
+              { key: "bean", text: "Bean", flex: 1.1 },
+              { key: "grind", text: "Grind", flex: 0.7, align: "right", monospace: true },
+              { key: "in", text: "In", flex: 0.6, align: "right", monospace: true },
+              { key: "out", text: "Out", flex: 0.7, align: "right", monospace: true },
+              { key: "time", text: "Time", flex: 0.7, align: "right", monospace: true },
+              { key: "notes", text: "Notes", flex: 2.2 },
             ]}
           />
 
@@ -105,35 +105,40 @@ export default function ExtractionsScreen() {
               <TableRow
                 onPress={() => openDetails(item.id)}
                 cells={[
-                  { key: "date", text: formatDateTime(item.createdAt), flex: 1.6 },
-                  { key: "bean", text: item.beanName, flex: 1.4 },
+                  { key: "bean", text: item.beanName, flex: 1.1 },
                   {
                     key: "grind",
-                    text: formatStep(item.grindSetting, 0.25),
-                    flex: 1,
+                    text: formatStepTrimmed(item.grindSetting, 0.25),
+                    flex: 0.7,
                     align: "right",
                     monospace: true,
                   },
                   {
                     key: "in",
-                    text: formatStep(item.weightIn, 0.1),
-                    flex: 0.8,
+                    text: formatStepTrimmed(item.weightIn, 0.1),
+                    flex: 0.6,
                     align: "right",
                     monospace: true,
                   },
                   {
                     key: "out",
-                    text: formatStep(item.weightOut, 0.1),
-                    flex: 0.9,
+                    text: formatStepTrimmed(item.weightOut, 0.1),
+                    flex: 0.7,
                     align: "right",
                     monospace: true,
                   },
                   {
                     key: "time",
                     text: `${item.timeSec}s`,
-                    flex: 0.9,
+                    flex: 0.7,
                     align: "right",
                     monospace: true,
+                  },
+                  {
+                    key: "notes",
+                    text: item.notes.trim() ? item.notes.trim() : "-",
+                    flex: 2.2,
+                    lines: 3,
                   },
                 ]}
               />
@@ -146,16 +151,6 @@ export default function ExtractionsScreen() {
       )}
     </Screen>
   );
-}
-
-function formatDateTime(timestamp: number) {
-  const date = new Date(timestamp);
-  return date.toLocaleString(undefined, {
-    month: "short",
-    day: "numeric",
-    hour: "2-digit",
-    minute: "2-digit",
-  });
 }
 
 const styles = StyleSheet.create({

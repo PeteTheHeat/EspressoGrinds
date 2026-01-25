@@ -27,7 +27,13 @@ export default function RootLayout() {
         }}
       >
         <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="extraction/[id]" options={{ title: "Extraction Details" }} />
+        <Stack.Screen
+          name="extraction/[id]"
+          options={{
+            title: "Extraction Details",
+            headerBackTitle: "Extractions",
+          }}
+        />
       </Stack>
     </ThemeProvider>
   );

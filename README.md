@@ -1,24 +1,40 @@
-# EspressoGrinds
+# Dialed
 
-A dark-mode espresso dial-in tracker built with Expo, React Native, TypeScript, and Expo Router.
+Dialed is a dark-mode espresso dial-in tracker built with Expo, React Native, and TypeScript.
 
-Track every extraction, compare results, and iterate quickly.
+This page acts as the public support URL for the iOS app.
 
-## Features
+## Support
+If you need help, found a bug, or want to request a feature, please open an issue in the GitHub repository.
+
+## Data & Privacy
+Dialed stores your data locally on your device using AsyncStorage.
+
+- No accounts
+- No backend
+- No cloud sync
+
+Because data is stored locally, it can be lost if you delete the app or clear app data.
+
+---
+
+## Engineering Info
+
+### Features
 - 3-tab workflow: **Add Extraction**, **Extractions**, **Settings**
 - Local-only persistence with AsyncStorage
-- Sleek dark theme forced regardless of system setting
+- Dark theme forced regardless of system setting
 - Table-style extraction list sorted newest first
 - Details screen with delete + confirmation
 - Bean type management with safe deletion (blocked when in use)
 
-## Tech Stack
+### Tech Stack
 - Expo (default setup)
 - React Native + TypeScript
 - Expo Router (file-based routing + bottom tabs)
 - `@react-native-async-storage/async-storage`
 
-## Project Structure
+### Project Structure
 
 ```text
 app/
@@ -39,18 +55,18 @@ src/
   types.ts
 ```
 
-## Getting Started
+### Getting Started
 
-### Prerequisites
-Expo SDK 54 expects a modern Node version. Use Node 20+.
+#### Prerequisites
+Expo SDK 54 expects Node 20+.
 
-### Install
+#### Install
 
 ```bash
 npm install
 ```
 
-### Run the App
+#### Run the App
 
 ```bash
 npm run start
@@ -61,15 +77,15 @@ Then choose one:
 - Press `a` for Android emulator
 - Scan the QR code with Expo Go
 
-## Data Model
+### Data Model
 
-### BeanType
+#### BeanType
 
 ```ts
 { id: string; name: string; createdAt: number }
 ```
 
-### Extraction
+#### Extraction
 
 ```ts
 {
@@ -84,16 +100,11 @@ Then choose one:
 }
 ```
 
-## Storage Keys
+### Storage Keys
 - `bean_types` => `BeanType[]`
 - `extractions` => `Extraction[]`
 
-## Notes on Behavior
-- You must create at least one bean type in **Settings** before saving extractions.
-- Bean type deletion is blocked if the bean is referenced by extractions.
-- Numeric inputs are clamped and rounded to their intended step sizes.
-
-## Scripts
+### Scripts
 
 ```bash
 npm run start
@@ -101,13 +112,3 @@ npm run android
 npm run ios
 npm run web
 ```
-
-## Publish Tips
-When publishing to GitHub, consider adding:
-- App screenshots or a short screen recording (in a `/docs` folder)
-- A brief changelog section
-- License information (e.g., MIT)
-
----
-
-Built for espresso nerds who like tight feedback loops.

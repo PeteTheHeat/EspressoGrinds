@@ -7,7 +7,7 @@ export const colors = {
   text: "#F3F3F4",
   textMuted: "#A7A7AD",
   border: "#2A2A2E",
-  inputBorder: "#3A3A40",
+  inputBorder: "#4A4A52",
   primary: "#C67C4E",
   primaryText: "#0B0B0C",
   danger: "#E06767",

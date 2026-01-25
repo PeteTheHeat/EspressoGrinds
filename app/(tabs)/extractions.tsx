@@ -89,12 +89,12 @@ export default function ExtractionsScreen() {
           <TableRow
             header
             cells={[
-              { key: "bean", text: "Bean", flex: 1.1 },
-              { key: "grind", text: "Grind", flex: 0.7, align: "right", monospace: true },
-              { key: "in", text: "In", flex: 0.6, align: "right", monospace: true },
-              { key: "out", text: "Out", flex: 0.7, align: "right", monospace: true },
-              { key: "time", text: "Time", flex: 0.7, align: "right", monospace: true },
-              { key: "notes", text: "Notes", flex: 2.2 },
+              { key: "bean", text: "Bean", flex: 1.4, lines: 3 },
+              { key: "grind", text: "Grind", flex: 0.9, align: "right", monospace: true },
+              { key: "in", text: "In", flex: 0.7, align: "right", monospace: true },
+              { key: "out", text: "Out", flex: 0.8, align: "right", monospace: true },
+              { key: "time", text: "Time", flex: 0.8, align: "right", monospace: true },
+              { key: "notes", text: "Notes", flex: 1.9 },
             ]}
           />
 
@@ -105,39 +105,39 @@ export default function ExtractionsScreen() {
               <TableRow
                 onPress={() => openDetails(item.id)}
                 cells={[
-                  { key: "bean", text: item.beanName, flex: 1.1 },
+                  { key: "bean", text: item.beanName, flex: 1.4, lines: 3 },
                   {
                     key: "grind",
                     text: formatStepTrimmed(item.grindSetting, 0.25),
-                    flex: 0.7,
+                    flex: 0.9,
                     align: "right",
                     monospace: true,
                   },
                   {
                     key: "in",
-                    text: formatStepTrimmed(item.weightIn, 0.1),
-                    flex: 0.6,
+                    text: `${formatStepTrimmed(item.weightIn, 0.1)}g`,
+                    flex: 0.7,
                     align: "right",
                     monospace: true,
                   },
                   {
                     key: "out",
-                    text: formatStepTrimmed(item.weightOut, 0.1),
-                    flex: 0.7,
+                    text: `${formatStepTrimmed(item.weightOut, 0.1)}g`,
+                    flex: 0.8,
                     align: "right",
                     monospace: true,
                   },
                   {
                     key: "time",
                     text: `${item.timeSec}s`,
-                    flex: 0.7,
+                    flex: 0.8,
                     align: "right",
                     monospace: true,
                   },
                   {
                     key: "notes",
                     text: item.notes.trim() ? item.notes.trim() : "-",
-                    flex: 2.2,
+                    flex: 1.9,
                     lines: 3,
                   },
                 ]}

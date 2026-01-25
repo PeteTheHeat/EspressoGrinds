@@ -1,14 +1,15 @@
 {
   "expo": {
-    "name": "EspressoGrinds",
-    "slug": "EspressoGrinds",
+    "name": "Dialed",
+    "slug": "dialed",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "espressogrinds",
+    "scheme": "dialed",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
     "ios": {
+      "bundleIdentifier": "com.peterargany.dialed",
       "supportsTablet": true
     },
     "android": {

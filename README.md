@@ -1,50 +1,113 @@
-# Welcome to your Expo app 👋
+# EspressoGrinds
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A dark-mode espresso dial-in tracker built with Expo, React Native, TypeScript, and Expo Router.
 
-## Get started
+Track every extraction, compare results, and iterate quickly.
 
-1. Install dependencies
+## Features
+- 3-tab workflow: **Add Extraction**, **Extractions**, **Settings**
+- Local-only persistence with AsyncStorage
+- Sleek dark theme forced regardless of system setting
+- Table-style extraction list sorted newest first
+- Details screen with delete + confirmation
+- Bean type management with safe deletion (blocked when in use)
 
-   ```bash
-   npm install
-   ```
+## Tech Stack
+- Expo (default setup)
+- React Native + TypeScript
+- Expo Router (file-based routing + bottom tabs)
+- `@react-native-async-storage/async-storage`
 
-2. Start the app
+## Project Structure
 
-   ```bash
-   npx expo start
-   ```
-
-In the output, you'll find options to open the app in a
-
-- [development build](https://docs.expo.dev/develop/development-builds/introduction/)
-- [Android emulator](https://docs.expo.dev/workflow/android-studio-emulator/)
-- [iOS simulator](https://docs.expo.dev/workflow/ios-simulator/)
-- [Expo Go](https://expo.dev/go), a limited sandbox for trying out app development with Expo
-
-You can start developing by editing the files inside the **app** directory. This project uses [file-based routing](https://docs.expo.dev/router/introduction).
-
-## Get a fresh project
-
-When you're ready, run:
-
-```bash
-npm run reset-project
+```text
+app/
+  _layout.tsx
+  index.tsx
+  (tabs)/
+    _layout.tsx
+    add.tsx
+    extractions.tsx
+    settings.tsx
+  extraction/
+    [id].tsx
+src/
+  components/
+  storage/
+  utils/
+  theme.ts
+  types.ts
 ```
 
-This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
+## Getting Started
 
-## Learn more
+### Prerequisites
+Expo SDK 54 expects a modern Node version. Use Node 20+.
 
-To learn more about developing your project with Expo, look at the following resources:
+### Install
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+```bash
+npm install
+```
 
-## Join the community
+### Run the App
 
-Join our community of developers creating universal apps.
+```bash
+npm run start
+```
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+Then choose one:
+- Press `i` for iOS simulator
+- Press `a` for Android emulator
+- Scan the QR code with Expo Go
+
+## Data Model
+
+### BeanType
+
+```ts
+{ id: string; name: string; createdAt: number }
+```
+
+### Extraction
+
+```ts
+{
+  id: string;
+  createdAt: number;
+  beanTypeId: string;
+  grindSetting: number; // 0-50 step 0.25
+  weightIn: number; // grams step 0.1
+  weightOut: number; // grams step 0.1
+  timeSec: number; // whole seconds
+  notes: string;
+}
+```
+
+## Storage Keys
+- `bean_types` => `BeanType[]`
+- `extractions` => `Extraction[]`
+
+## Notes on Behavior
+- You must create at least one bean type in **Settings** before saving extractions.
+- Bean type deletion is blocked if the bean is referenced by extractions.
+- Numeric inputs are clamped and rounded to their intended step sizes.
+
+## Scripts
+
+```bash
+npm run start
+npm run android
+npm run ios
+npm run web
+```
+
+## Publish Tips
+When publishing to GitHub, consider adding:
+- App screenshots or a short screen recording (in a `/docs` folder)
+- A brief changelog section
+- License information (e.g., MIT)
+
+---
+
+Built for espresso nerds who like tight feedback loops.

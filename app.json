@@ -1,8 +1,8 @@
 {
   "expo": {
-    "name": "Dialed",
+    "name": "Perfect Pull",
     "slug": "dialed",
-    "version": "1.0.0",
+    "version": "1.0.2",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
     "scheme": "dialed",
@@ -10,12 +10,14 @@
     "newArchEnabled": true,
     "ios": {
       "bundleIdentifier": "com.peterargany.dialed",
+      "buildNumber": "4",
       "supportsTablet": true,
       "infoPlist": {
         "ITSAppUsesNonExemptEncryption": false
       }
     },
     "android": {
+      "versionCode": 4,
       "adaptiveIcon": {
         "backgroundColor": "#E6F4FE",
         "foregroundImage": "./assets/images/android-icon-foreground.png",

@@ -1,6 +1,6 @@
-# Dialed
+# Perfect Pull
 
-Dialed is a dark-mode espresso dial-in tracker built with Expo, React Native, and TypeScript.
+Perfect Pull is a dark-mode espresso dial-in tracker built with Expo, React Native, and TypeScript.
 
 This page acts as the public support URL for the iOS app.
 
@@ -8,7 +8,7 @@ This page acts as the public support URL for the iOS app.
 If you need help, found a bug, or want to request a feature, please open an issue in the GitHub repository.
 
 ## Data & Privacy
-Dialed stores your data locally on your device using AsyncStorage.
+Perfect Pull stores your data locally on your device using AsyncStorage.
 
 - No accounts
 - No backend
